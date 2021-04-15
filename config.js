@@ -114,16 +114,19 @@ setTimeout(() => {
     data: [],
     borderColor: "#3e95cd",
     fill: false,
+    label: "Max-Temperature"
   };
   const tminDataset = {
     data: [],
     borderColor: "#8e5ea2",
     fill: false,
+    label: "Min-Temperature"
   };
   const prcpDataset = {
     data: [],
     borderColor: "#3cba9f",
     fill: false,
+    label: "Precipitation"
   };
   const datasets = [];
   cityTemp.forEach(item => {
