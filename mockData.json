@@ -1,5 +1,6 @@
 {
-    "USW00003860": [
+    "cityId": "USW00003860",
+    "cityTemperature": [
         {
             "Data_Date": "1/1/1892",
             "tmax": "56.00",

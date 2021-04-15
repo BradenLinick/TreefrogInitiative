@@ -5,7 +5,7 @@
 }
 
 .header {
-  padding: 40px 200px;
+  padding: 25px 200px;
   display: flex;
   justify-content: center;
 }
@@ -15,14 +15,13 @@
   flex-direction: column;
 }
 
-.map {
-  outline: 1px solid black;
-  height: 250px;
-  width: 100%;
-}
+/* .chart {
 
-.chart {
+} */
+
+.map-container {
   outline: 1px solid black;
-  height: 250px;
+  height: 350px;
   width: 100%;
+  margin-bottom: 1rem;
 }
