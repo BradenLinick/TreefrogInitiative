@@ -20,7 +20,7 @@ require([
     container: "viewDiv", 
     map: map, 
     zoom: 4, 
-    center: [-103, 44], // Sets center point of view using longitude,latitude
+    center: [15, 65], // Sets center point of view using longitude,latitude
   });
   var featureLayer = new FeatureLayer({
     url:
@@ -75,79 +75,32 @@ require([
               feature.attributes.Name +
               ". The code will send for the backend service by the city Id: " +
               feature.attributes.ID
-              //Use the above variable for the city id for api call
           );
           newCityID = feature.attributes.ID
+
+          // feature.attributes.layerName = layerName;
+          // feature.popupTemplate = {
+          //   // autocasts as new PopupTemplate()
+          //   title: "Cities Selected",
+          //   content:
+          //     "<ul><li>City Name: {Name}</li>" + "<li>ID: {ID} </li><ul>",
+          // };
+
+          // return feature;
         });
       })
-     
-    // function showPopup(response) {
-    //   if (response.length > 0) {
-    //     view.popup.open({
-    //       features: response,
-    //       location: event.mapPoint,
-    //     });
-    //   }
-    //   document.getElementById("viewDiv").style.cursor = "auto";
-    // }
+      // .then(showPopup); // Send the array of features to showPopup()
+
+    function showPopup(response) {
+      if (response.length > 0) {
+        view.popup.open({
+          features: response,
+          location: event.mapPoint,
+        });
+      }
+      document.getElementById("viewDiv").style.cursor = "auto";
+    }
 
   }
   // Shows the results of the Identify in a popup once the promise is resolved
 });
-
-
-let jsondata;
-fetch('./mockData.json')
-  .then(response => response.json())
-  .then(newData => {
-    console.log(newData)
-    jsondata = newData;
-  })
-  .catch(err => console.log(error));
-
-setTimeout(() => { 
-  console.log(jsondata.cityTemperature); 
-  const labels = [];
-  const cityTemp = jsondata.cityTemperature
-  cityTemp.forEach(item => labels.push(item.Data_Date));
-  const tmaxDataset = {
-    data: [],
-    borderColor: "#3e95cd",
-    fill: false,
-  };
-  const tminDataset = {
-    data: [],
-    borderColor: "#8e5ea2",
-    fill: false,
-  };
-  const prcpDataset = {
-    data: [],
-    borderColor: "#3cba9f",
-    fill: false,
-  };
-  const datasets = [];
-  cityTemp.forEach(item => {
-    tmaxDataset.data.push(item.tmax);
-    tminDataset.data.push(item.tmin);
-    prcpDataset.data.push(item.prcp);
-  });
-
-  datasets.push(tmaxDataset, tminDataset, prcpDataset)
-
-  
-  console.log(datasets)
-
-  new Chart(document.getElementById("line-chart"), {
-    type: 'line',
-    data: {
-      labels,
-      datasets
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'World population per region (in millions)'
-      }
-    }
-  });
-}, 2000);
