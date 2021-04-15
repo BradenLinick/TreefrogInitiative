@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 40px 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.map {
+  outline: 1px solid black;
+  height: 250px;
+  width: 100%;
+}
+
+.chart {
+  outline: 1px solid black;
+  height: 250px;
+  width: 100%;
+}
