@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Javascript Login Form Validation</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include CSS File Here -->
+    <link rel="stylesheet" href="main.css"/>
+    <!-- Include JS File Here -->
+    <script src="login.js"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-main">
+        <h2>Javascript Login Form Validation</h2>
+        <form id="form_id" method="post" name="myform">
+          <label>User Name :</label>
+          <input class="form-inputs" type="text" name="username" id="username" autocomplete="off"/>
+          <label>Password :</label>
+          <input class="form-inputs" type="password" name="password" id="password"/>
+          <input class="form-inputs" type="button" value="Login" id="submit" onclick="validate()"/>
+        </form>
+        <span><b class="note">Note : </b>For this hacksthon use: the admin account is following username and password. <br/><b class="valid">User Name : Admin<br/>Password : admin#123</b></span>
+      </div>
+    </div>
+    </body>
+</html>
