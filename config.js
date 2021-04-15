@@ -67,7 +67,7 @@ require([
 
         return results.find(function (result) {
           var feature = result.feature;
-          var layerName = result.layerName;
+          // var layerName = result.layerName;
 
           // Braden, Malli, I will call your code here passing the city_ID
           alert(
