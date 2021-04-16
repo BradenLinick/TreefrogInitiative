@@ -95,22 +95,21 @@ require([
 
           const cityName = feature.attributes.City_Name
           const newCityID = feature.attributes.City_ID;
-          const tmax = feature.attributes.Tmax;
-          const tmin = feature.attributes.Tmin;
-          const prcp = feature.attributes.Prcp;
+          const tmax = +feature.attributes.Tmax;
+          const tmin = +feature.attributes.Tmin;
+          const prcp = +feature.attributes.Prcp;
           const humidity = feature.attributes.Humidity;
 
+          console.log(tmax);
 
-          // callData(newCityID);
-
-          document.getElementById('high').innerHTML = '75' + '&#730;';
-          document.getElementById('low').innerHTML = '75' + '&#730;';
-          document.getElementById('precipitation').innerHTML = '75' + '%';
-          document.getElementById('humidity').innerHTML = '75' + '%';
-          document.getElementById('city').innerHTML = 'San Francisco' + ' - Trends';
+          document.getElementById('city').innerHTML = cityName + ' - Trends';
+          document.getElementById('high').innerHTML = tmax.toFixed(2) + '&#730;';
+          document.getElementById('low').innerHTML = tmin.toFixed(2) + '&#730;';
+          document.getElementById('precipitation').innerHTML = prcp.toFixed(2) + '%';
+          document.getElementById('humidity').innerHTML = humidity + '%';
 
           // const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
-          const path = "https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=1.5&Tmin=2.5&Prcp=3.5&Humidity=4.2"
+          const path = `https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=${tmax}&Tmin=${tmin}&Prcp=${prcp}&Humidity=${humidity}`
           fetch(path)
             .then((response) => response.json())
             .then((newData) => {
