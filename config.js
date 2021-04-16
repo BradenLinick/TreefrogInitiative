@@ -16,17 +16,17 @@ require([
   Search
 ) {
   var map = new Map({
-    basemap: "topo-vector",
+    basemap: "gray-vector" //"topo-vector",
   });
   var view = new MapView({
     container: "viewDiv",
     map: map,
     zoom: 4,
-    center: [-103, 44], // Sets center point of view using longitude,latitude
+    center: [-100, 39], // Sets center point of view using longitude,latitude
   });
   var featureLayer = new FeatureLayer({
     url:
-      "https://sfi.gotdns.com:8081/arcgis/rest/services/usda/cities/MapServer/0",
+      "https://sfi.gotdns.com:8081/arcgis/rest/services/usda/hot_cities/MapServer/0",
   });
   map.add(featureLayer);
 
@@ -46,12 +46,12 @@ require([
 
     // Create identify task for the specified map service
     newTask = new IdentifyTask(
-      "https://sfi.gotdns.com:8081/arcgis/rest/services/usda/cities/MapServer/"
+      "https://sfi.gotdns.com:8081/arcgis/rest/services/usda/hot_cities/MapServer"
     );
 
     // Set the parameters for the Identify
     params = new IdentifyParameters();
-    params.tolerance = 3;
+    params.tolerance = 7;
     params.layerIds = [0, 1, 2];
     params.layerOption = "top";
     params.width = view.width;
@@ -91,7 +91,16 @@ require([
           tooltipSpan.style.display = 'block';
           tooltipSpan.style.top = (y + 20) + 'px';
           tooltipSpan.style.left = (x - 100) + 'px';
-          var newCityID = feature.attributes.ID;
+
+
+          const cityName = feature.attributes.City_Name
+          const newCityID = feature.attributes.City_ID;
+          const tmax = feature.attributes.Tmax;
+          const tmin = feature.attributes.Tmin;
+          const prcp = feature.attributes.Prcp;
+          const humidity = feature.attributes.Humidity;
+
+
           // callData(newCityID);
 
           // const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
