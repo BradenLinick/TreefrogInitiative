@@ -94,6 +94,12 @@ require([
           var newCityID = feature.attributes.ID;
           // callData(newCityID);
 
+          document.getElementById('high').innerHTML = '75' + '&#730;';
+          document.getElementById('low').innerHTML = '75' + '&#730;';
+          document.getElementById('precipitation').innerHTML = '75' + '%';
+          document.getElementById('humidity').innerHTML = '75' + '%';
+          document.getElementById('city').innerHTML = 'San Francisco' + ' - Trends';
+
           // const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
           const path = "https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=1.5&Tmin=2.5&Prcp=3.5&Humidity=4.2"
           fetch(path)
@@ -125,37 +131,16 @@ require([
                   ]
                 },
                 options: {
-                  legend: { display: false },
-                  title: {
-                    display: false
+                  plugins: {
+                    legend: {
+                      display: false,
+                    }
                   }
-                }
+                },
               });
 
             })
             .catch((err) => console.log(error));
-
-          // const someData = {
-          //   "hottopic": [
-          //     {
-          //       "travel": 8.9,
-          //       "education": 4.5,
-          //       "food": 6,
-          //       "music": 5.2,
-          //       "shopping": 9.1
-          //     }
-          //   ]
-          // }
-
-          // console.log(someData.hottopic[0])
-
-          // const trendData = [];
-          // for (const [key, value] of Object.entries(someData.hottopic[0])) {
-          //   trendData.push(value);
-          // }
-
-          // console.log(trendData);
-
         }
       })
 

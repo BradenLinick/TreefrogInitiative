@@ -37,7 +37,7 @@
         z-index: 1;
         background: white;
         display: none;
-        height: 375px;
+        height: 365px;
         width: 410px;
         padding: 1rem 1rem;
       }
@@ -52,27 +52,27 @@
 
   <body>
     <div id="tooltip-span" class="display-flex flex-column">
-      <h6>Trends</h6>
-      <h4 id="city">City</h4>
+      <h4 id="city"></h4>
       <p>Temperature</p>
-      <div class="temp-container">
+      <div class="temp-container my-1">
         <div class="temp-sub-container">
           <p class="small-font">Highest</p>
-          <p id="high" class="number">75%</p>
+          <p id="high" class="number"></p>
         </div>
         <div class="temp-sub-container">
-          <p id="low" class="small-font">Lowest</p>
-          <p class="number">75%</p>
+          <p class="small-font">Lowest</p>
+          <p id="low" class="number"></p>
         </div>
         <div class="temp-sub-container">
           <p class="small-font">Precipitation</p>
-          <p id="precipitation" class="number">75%</p>
+          <p id="precipitation" class="number"></p>
         </div>
         <div class="temp-sub-container">
           <p class="small-font">Humidity</p>
-          <p id="humidity" class="number">75%</p>
+          <p id="humidity" class="number"></p>
         </div>
       </div>
+      <p class="mb-1">Hot Topics</p>
       <canvas id="bar-chart" width="600" height="300"></canvas>
     </div>
 
