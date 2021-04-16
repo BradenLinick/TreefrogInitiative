@@ -6,14 +6,16 @@ require([
   "esri/layers/FeatureLayer",
   "esri/tasks/IdentifyTask",
   "esri/tasks/support/IdentifyParameters",
-  "esri/widgets/Search"
+  "esri/widgets/Search",
+  "esri/widgets/Legend"
 ], function (
   Map,
   MapView,
   FeatureLayer,
   IdentifyTask,
   IdentifyParameters,
-  Search
+  Search,
+  Legend
 ) {
   var map = new Map({
     basemap: "gray-vector" //"topo-vector",
@@ -39,6 +41,16 @@ require([
     position: "top-right"
   });
 
+  var legend = new Legend({
+    view: view,
+    layerInfos: [
+      {
+        layer: featureLayer,
+        title: "City Temperatures"
+      }
+    ]
+  });
+  view.ui.add(legend, "bottom-left");
 
   view.when(function () {
     // executeIdentifyTask() is called each time the view is clicked
@@ -93,16 +105,16 @@ require([
           console.warn("Hello event screen.width", screen.width)
           screen.width
           // adjust if out of bounds
-          if (y > 700) {
+          if (y > 600) {
             y = 500;
           }
           if (x > screen.width - 300) {
             x = screen.width - 400
           } else if (x < 300) {
-            x = 200;
+            x = 250;
           }
           tooltipSpan.style.top = (y + 20) + 'px';
-          tooltipSpan.style.left = (x - 100) + 'px';
+          tooltipSpan.style.left = (x - 200) + 'px';
 
 
           const cityName = feature.attributes.City_Name
@@ -115,8 +127,8 @@ require([
           console.log(tmax);
 
           document.getElementById('city').innerHTML = cityName + ' - Trends';
-          document.getElementById('high').innerHTML = tmax.toFixed(2) + '&#730;';
-          document.getElementById('low').innerHTML = tmin.toFixed(2) + '&#730;';
+          document.getElementById('high').innerHTML = tmax.toFixed(2) + '&#8457;';
+          document.getElementById('low').innerHTML = tmin.toFixed(2) + '&#8457;';
           document.getElementById('precipitation').innerHTML = prcp.toFixed(2) + '%';
           document.getElementById('humidity').innerHTML = humidity + '%';
 
@@ -146,7 +158,10 @@ require([
                   datasets: [
                     {
                       label: '',
-                      backgroundColor: ["#3e95cd", "#8e5ea2", "#e8c3b9", "#c45850"],
+                      backgroundColor: ['#0f1233',
+                        '#f3d748',
+                        '#e83a8a',
+                        '#ec9c51',],
                       data: trendData
                     }
                   ]
