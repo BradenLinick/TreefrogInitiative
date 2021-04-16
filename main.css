@@ -23,6 +23,28 @@ body {
   outline: 1px solid black;
 }
 
+.small-font {
+  font-size: 12px;
+}
+
+.number {
+  font-size: 20px;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.temp-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.temp-sub-container {
+  display: flex;
+  flex-direction: column;
+}
+
 #line-chart {
   z-index: 2;
 }

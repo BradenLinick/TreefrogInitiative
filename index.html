@@ -29,8 +29,8 @@
       z-index: 1;
       background: white;
       display: none;
-      height: 355px;
-      width: 450px;
+      height: 315px;
+      width: 410px;
       padding: 1rem 1rem;
     }
 
@@ -44,12 +44,30 @@
 </head>
 
 <body>
-  <span id="tooltip-span" class="display-flex flex-column">
-    <h6>Trend</h6>
+  <div id="tooltip-span" class="display-flex flex-column">
+    <h6>Trends</h6>
     <h4>City</h4>
     <p>Temperature</p>
-    <canvas id="bar-chart" width="700" height="375"></canvas>
-  </span>
+    <div class="temp-container">
+      <div class="temp-sub-container">
+        <p class="small-font">Highest</p>
+        <p class="number">75%</p>
+      </div>
+      <div class="temp-sub-container">
+        <p class="small-font">Lowest</p>
+        <p class="number">75%</p>
+      </div>
+      <div class="temp-sub-container">
+        <p class="small-font">Precipitation</p>
+        <p class="number">75%</p>
+      </div>
+      <div class="temp-sub-container">
+        <p class="small-font">Humidity</p>
+        <p class="number">75%</p>
+      </div>
+    </div>
+    <canvas id="bar-chart" width="600" height="300"></canvas>
+  </div>
 
   <div class="map-container">
     <div id="viewDiv"></div>
