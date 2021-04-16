@@ -57,21 +57,13 @@ require([
   });
 
   function executeIdentifyTask(event) {
-
+    console.warn("Hello event ", event)
     var tooltipSpan = document.getElementById('tooltip-span');
-    var x = event.clientX;
-    var y = event.clientY;
-    console.warn("Hello y ", y)
+    var x = event.x;
+    var y = event.y;
+    tooltipSpan.style.display = 'block';
     tooltipSpan.style.top = (y + 20) + 'px';
-    tooltipSpan.style.left = (x + 20) + 'px';
-
-    // window.onmousemove = function (e) {
-    //   var x = e.clientX,
-    //     y = e.clientY;
-    //   tooltipSpan.style.top = (y + 20) + 'px';
-    //   tooltipSpan.style.left = (x + 20) + 'px';
-    // };
-
+    tooltipSpan.style.left = (x - 100) + 'px';
 
 
     params.geometry = event.mapPoint;
