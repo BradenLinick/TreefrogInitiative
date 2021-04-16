@@ -84,11 +84,23 @@ require([
           //   feature.attributes.ID
           //   //Use the above variable for the city id for api call
           // );
-          console.warn("Hello event ", event)
+
           var tooltipSpan = document.getElementById('tooltip-span');
           var x = event.x;
           var y = event.y;
           tooltipSpan.style.display = 'block';
+          console.warn("Hello event x, y", x, y)
+          console.warn("Hello event screen.width", screen.width)
+          screen.width
+          // adjust if out of bounds
+          if (y > 700) {
+            y = 500;
+          }
+          if (x > screen.width - 300) {
+            x = screen.width - 400
+          } else if (x < 300) {
+            x = 200;
+          }
           tooltipSpan.style.top = (y + 20) + 'px';
           tooltipSpan.style.left = (x - 100) + 'px';
 
