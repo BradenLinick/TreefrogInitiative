@@ -6,12 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background-image: url('./weather.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
 .header {
   padding: 25px 200px;
   display: flex;
@@ -28,7 +22,6 @@ body {
 }
 
 .map-container {
-  outline: 1px solid black;
   height: 350px;
   width: 100%;
   margin-bottom: 1rem;
