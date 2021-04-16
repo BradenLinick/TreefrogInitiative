@@ -59,6 +59,10 @@ require([
   });
 
   function executeIdentifyTask(event) {
+    
+    // hide tooltip
+    var tooltipSpan = document.getElementById('tooltip-span');
+    tooltipSpan.style.display = 'none';
 
     params.geometry = event.mapPoint;
     params.mapExtent = view.extent;
@@ -90,68 +94,83 @@ require([
 
           const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
 
-          fetch(api_url)
-            .then((response) => response.json())
-            .then((newData) => {
-              console.log('newData', newData);
-              //console.log(newData);
-              jsondata = newData;
-              generate_chart(jsondata);
-            })
-            .catch((err) => console.log(error));
+          // fetch(api_url)
+          //   .then((response) => response.json())
+          //   .then((newData) => {
+          //     console.log('newData', newData);
+          //     //console.log(newData);
+          //     jsondata = newData;
+          //     generate_chart(jsondata);
+          //   })
+          //   .catch((err) => console.log(error));
 
-          let jsondata;
+          const someData = {
+            "hottopic": [
+                {
+                    "travel": 8.9,
+                    "education": 4.5,
+                    "food": 6,
+                    "music": 5.2,
+                    "shopping": 9.1
+                }
+            ]
+          }
 
-          const generate_chart = (jsondata) => {
-            console.log('jsondata.cityTemperature', jsondata.cityTemperature);
-            const labels = [];
-            const cityId = jsondata.cityId;
+          console.log(someData.hottopic[0])
 
-            const cityTemp = jsondata.cityTemperature;
-            cityTemp.forEach((item) => labels.push(item.year));
-            const tmaxDataset = {
-              label: 'Max-Temperature',
-              data: [],
-              borderColor: '#3e95cd',
-              fill: false,
-            };
-            const tminDataset = {
-              label: 'Min-Temperature',
-              data: [],
-              borderColor: '#8e5ea2',
-              fill: false,
-            };
-            const prcpDataset = {
-              label: 'Precipitation',
-              data: [],
-              borderColor: '#3cba9f',
-              fill: false,
-            };
-            const datasets = [];
-            cityTemp.forEach((item) => {
-              tmaxDataset.data.push(item.tmax);
-              tminDataset.data.push(item.tmin);
-              prcpDataset.data.push(item.prcp);
-            });
+          const trendData = [];
+          for (const [key, value] of Object.entries(someData.hottopic[0])) {
+            trendData.push(value);
+          }
 
-            datasets.push(tmaxDataset, tminDataset, prcpDataset);
+          console.log(trendData);
 
-            console.log(datasets);
+            // console.log('jsondata.cityTemperature', jsondata.cityTemperature);
+            // const labels = [];
+            // const cityId = jsondata.cityId;
 
-          };
+            // const cityTemp = jsondata.cityTemperature;
+            // cityTemp.forEach((item) => labels.push(item.year));
+            // const tmaxDataset = {
+            //   label: 'Max-Temperature',
+            //   data: [],
+            //   borderColor: '#3e95cd',
+            //   fill: false,
+            // };
+            // const tminDataset = {
+            //   label: 'Min-Temperature',
+            //   data: [],
+            //   borderColor: '#8e5ea2',
+            //   fill: false,
+            // };
+            // const prcpDataset = {
+            //   label: 'Precipitation',
+            //   data: [],
+            //   borderColor: '#3cba9f',
+            //   fill: false,
+            // };
+            // const datasets = [];
+            // cityTemp.forEach((item) => {
+            //   tmaxDataset.data.push(item.tmax);
+            //   tminDataset.data.push(item.tmin);
+            //   prcpDataset.data.push(item.prcp);
+            // });
 
+            // datasets.push(tmaxDataset, tminDataset, prcpDataset);
+
+            // console.log(datasets);
 
 
 
           new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
             data: {
-              labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+              labels: ["Travel", "Education", "Food", "Music", "Shopping"],
               datasets: [
                 {
-                  label: "Population (millions)",
+                  label: "Trends",
                   backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                  data: [2478,5267,734,784,433]
+                  data: trendData
                 }
               ]
             },
