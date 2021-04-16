@@ -1,32 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <title>Climate Watcher</title>
-    <style>
-      #viewDiv {
-        height: 100vh;
-        width: 100%;
-      }
-    </style>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link
-      rel="stylesheet"
-      href="https://js.arcgis.com/4.18/esri/themes/light/main.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://js.arcgis.com/4.18/"></script>
-    <!-- <script src="map.js"></script> -->
-    <script src="config.js"></script>
-  </head>
-  <body>
-    <div class="map-container">
-      <div id="viewDiv"></div>
-    </div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Climate Watcher</title>
+  <style>
+    #viewDiv {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://js.arcgis.com/4.18/"></script>
+  <!-- <script src="map.js"></script> -->
+  <script src="config.js"></script>
+
+
+  <style>
+    #tooltip-span {
+      text-decoration: none;
+      position: absolute;
+      border: solid red 2px;
+      z-index: 99;
+      background: lightblue;
+    }
+
+    #tooltip-span span {
+      display: none;
+    }
+
+    .map-container:hover .tooltip-span span {
+      display: block;
+      position: fixed;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <span id="tooltip-span">
+    <p>This is a tooltip</p>
+    <p>Food: 99</p>
+    <p>Weather: blah blah blah</p>
+    <div id="line-chart"></div>
+  </span>
+
+  <div class="map-container">
+    <div id="viewDiv"></div>
+  </div>
+
+</body>
+<script>
+  // var tooltipSpan = document.getElementById('tooltip-span');
+
+  // window.onmousemove = function (e) {
+  //   var x = e.clientX,
+  //     y = e.clientY;
+  //   tooltipSpan.style.top = (y + 20) + 'px';
+  //   tooltipSpan.style.left = (x + 20) + 'px';
+  // };
+</script>
+
 </html>
