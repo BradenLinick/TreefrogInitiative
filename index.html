@@ -24,21 +24,16 @@
       rel="stylesheet"
       href="https://js.arcgis.com/4.18/esri/themes/light/main.css"
     />
+    <!-- Roboto Slab -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Roboto -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap"
       rel="stylesheet"
     />
 
@@ -65,35 +60,52 @@
         position: fixed;
         overflow: hidden;
       }
+
+      .font-regular {
+        font-family: 'Roboto';
+        font-weight: 400;
+      }
+
+      .font-slab {
+        font-family: 'Roboto Slab';
+        font-weight: 700;
+      }
+
+      .font-black {
+        font-family: 'Roboto';
+        font-weight: 900;
+      }
     </style>
   </head>
 
   <body>
     <div id="tooltip-span" class="display-flex flex-column">
-      <h4 id="city"></h4>
-      <p>Temperature</p>
-      <div class="temp-container my-1">
-        <div class="temp-sub-container">
-          <p class="small-font">Highest</p>
-          <p id="high" class="number"></p>
-        </div>
-        <div class="temp-sub-container">
-          <p class="small-font">Lowest</p>
-          <p id="low" class="number"></p>
-        </div>
-        <div class="temp-sub-container">
-          <p class="small-font">Precipitation</p>
-          <p id="precipitation" class="number"></p>
-        </div>
-        <div class="temp-sub-container">
-          <p class="small-font">Humidity</p>
-          <p id="humidity" class="number"></p>
-        </div>
-      </div>
-      <p class="mb-1">Hot Topics</p>
-      <canvas id="bar-chart" width="600" height="300"></canvas>
-    </div>
+      <h4 id="city" class="font-black"></h4>
 
+      <div class="font-regular">
+        <p>Temperature</p>
+        <div class="temp-container my-1">
+          <div class="temp-sub-container">
+            <p class="small-font">Highest</p>
+            <p id="high" class="font-slab"></p>
+          </div>
+          <div class="temp-sub-container">
+            <p class="small-font">Lowest</p>
+            <p id="low" class="font-slab"></p>
+          </div>
+          <div class="temp-sub-container">
+            <p class="small-font">Precipitation</p>
+            <p id="precipitation" class="font-slab"></p>
+          </div>
+          <div class="temp-sub-container">
+            <p class="small-font">Humidity</p>
+            <p id="humidity" class="font-slab"></p>
+          </div>
+        </div>
+        <p class="mb-1">Hot Topics</p>
+        <canvas id="bar-chart" width="600" height="300"></canvas>
+      </div>
+    </div>
     <div class="map-container">
       <div id="viewDiv"></div>
     </div>
