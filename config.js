@@ -58,9 +58,11 @@ require([
     params.height = view.height;
   });
 
+  let myLineChart;
   function executeIdentifyTask(event) {
     
     // hide tooltip
+    
     var tooltipSpan = document.getElementById('tooltip-span');
     tooltipSpan.style.display = 'none';
 
@@ -160,15 +162,17 @@ require([
 
             // console.log(datasets);
 
+          if (myLineChart !== undefined) {
+            myLineChart.destroy();
+          }
 
-
-          new Chart(document.getElementById("bar-chart"), {
+          myLineChart = new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
             data: {
               labels: ["Travel", "Education", "Food", "Music", "Shopping"],
               datasets: [
                 {
-                  label: "Trends",
+                  label: '',
                   backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
                   data: trendData
                 }
@@ -177,8 +181,7 @@ require([
             options: {
               legend: { display: false },
               title: {
-                display: true,
-                text: 'Predicted world population (millions) in 2050'
+                display: false
               }
             }
         });
