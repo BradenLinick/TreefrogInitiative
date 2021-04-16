@@ -109,7 +109,8 @@ require([
           document.getElementById('humidity').innerHTML = humidity + '%';
 
           // const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
-          const path = `https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=${tmax}&Tmin=${tmin}&Prcp=${prcp}&Humidity=${humidity}`
+
+          const path = `https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=${tmax}&Tmin=${tmin}&Prcp=${prcp}&Humidity=${humidity}`;
           fetch(path)
             .then((response) => response.json())
             .then((newData) => {
@@ -139,6 +140,12 @@ require([
                   ]
                 },
                 options: {
+                  scales: {
+                    y: {
+                      suggestedMin: 0,
+                      suggestedMax: 100
+                    }
+                  },
                   plugins: {
                     legend: {
                       display: false,
