@@ -15,9 +15,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
   <script src="https://js.arcgis.com/4.18/"></script>
-  <!-- <script src="map.js"></script> -->
   <script src="config.js"></script>
 
 
@@ -25,13 +24,14 @@
     #tooltip-span {
       text-decoration: none;
       position: absolute;
-      border: solid red 2px;
-      z-index: 99;
-      background: lightblue;
-    }
-
-    #tooltip-span {
+      border: 1px solid black;
+      border-radius: 5px;
+      z-index: 1;
+      background: white;
       display: none;
+      height: 275px;
+      width: 450px;
+      padding: 1rem 1rem;
     }
 
     .map-container:hover .tooltip-span span {
@@ -45,15 +45,16 @@
 
 <body>
   <span id="tooltip-span">
-    <p>This is a tooltip</p>
-    <p>Food: 99</p>
-    <p>Weather: blah blah blah</p>
-    <div id="line-chart"></div>
+    <canvas id="bar-chart" width="800" height="450"></canvas>
   </span>
 
   <div class="map-container">
     <div id="viewDiv"></div>
   </div>
+
+  <!-- <div class="chart-container">
+    <canvas id="bar-chart-horizontal"></canvas>
+  </div> -->
 
 </body>
 <script>

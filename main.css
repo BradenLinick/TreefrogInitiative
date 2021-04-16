@@ -6,10 +6,25 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   padding: 25px 200px;
   display: flex;
   justify-content: center;
+}
+
+.chart-container {
+  height: 250px;
+  width: 400px;
+  outline: 1px solid black;
+}
+
+#line-chart {
+  z-index: 2;
 }
 
 .container {

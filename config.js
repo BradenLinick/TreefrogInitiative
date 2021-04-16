@@ -1,3 +1,5 @@
+
+
 require([
   "esri/Map",
   "esri/views/MapView",
@@ -57,14 +59,6 @@ require([
   });
 
   function executeIdentifyTask(event) {
-    console.warn("Hello event ", event)
-    var tooltipSpan = document.getElementById('tooltip-span');
-    var x = event.x;
-    var y = event.y;
-    tooltipSpan.style.display = 'block';
-    tooltipSpan.style.top = (y + 20) + 'px';
-    tooltipSpan.style.left = (x - 100) + 'px';
-
 
     params.geometry = event.mapPoint;
     params.mapExtent = view.extent;
@@ -77,15 +71,98 @@ require([
         if (results && results.length > 0) {
           var feature = results[0].feature;
           // Braden, Malli, I will call your code here passing the city_ID
-          alert(
-            "You have picked up city " +
-            feature.attributes.Name +
-            ". The code will send for the backend service by the city Id: " +
-            feature.attributes.ID
-            //Use the above variable for the city id for api call
-          );
+          // alert(
+          //   "You have picked up city " +
+          //   feature.attributes.Name +
+          //   ". The code will send for the backend service by the city Id: " +
+          //   feature.attributes.ID
+          //   //Use the above variable for the city id for api call
+          // );
+          console.warn("Hello event ", event)
+          var tooltipSpan = document.getElementById('tooltip-span');
+          var x = event.x;
+          var y = event.y;
+          tooltipSpan.style.display = 'block';
+          tooltipSpan.style.top = (y + 20) + 'px';
+          tooltipSpan.style.left = (x - 100) + 'px';
           var newCityID = feature.attributes.ID;
-          callData(newCityID);
+          // callData(newCityID);
+
+          const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
+
+          fetch(api_url)
+            .then((response) => response.json())
+            .then((newData) => {
+              console.log('newData', newData);
+              //console.log(newData);
+              jsondata = newData;
+              generate_chart(jsondata);
+            })
+            .catch((err) => console.log(error));
+
+          let jsondata;
+
+          const generate_chart = (jsondata) => {
+            console.log('jsondata.cityTemperature', jsondata.cityTemperature);
+            const labels = [];
+            const cityId = jsondata.cityId;
+
+            const cityTemp = jsondata.cityTemperature;
+            cityTemp.forEach((item) => labels.push(item.year));
+            const tmaxDataset = {
+              label: 'Max-Temperature',
+              data: [],
+              borderColor: '#3e95cd',
+              fill: false,
+            };
+            const tminDataset = {
+              label: 'Min-Temperature',
+              data: [],
+              borderColor: '#8e5ea2',
+              fill: false,
+            };
+            const prcpDataset = {
+              label: 'Precipitation',
+              data: [],
+              borderColor: '#3cba9f',
+              fill: false,
+            };
+            const datasets = [];
+            cityTemp.forEach((item) => {
+              tmaxDataset.data.push(item.tmax);
+              tminDataset.data.push(item.tmin);
+              prcpDataset.data.push(item.prcp);
+            });
+
+            datasets.push(tmaxDataset, tminDataset, prcpDataset);
+
+            console.log(datasets);
+
+          };
+
+
+
+
+          new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: {
+              labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                  data: [2478,5267,734,784,433]
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Predicted world population (millions) in 2050'
+              }
+            }
+        });
         }
       })
 
@@ -106,69 +183,56 @@ require([
 
 function callData(id) {
 
-  const api_url =
-    `http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${id}&month=1`;
+  // const api_url =
+  //   `http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${id}&month=1`;
 
-  let jsondata;
+  // let jsondata;
 
-  let generate_chart = (jsondata) => {
-    console.log('jsondata.cityTemperature', jsondata.cityTemperature);
-    const labels = [];
-    const cityId = jsondata.cityId;
+  // let generate_chart = (jsondata) => {
+  //   console.log('jsondata.cityTemperature', jsondata.cityTemperature);
+  //   const labels = [];
+  //   const cityId = jsondata.cityId;
 
-    const cityTemp = jsondata.cityTemperature;
-    cityTemp.forEach((item) => labels.push(item.year));
-    const tmaxDataset = {
-      label: 'Max-Temperature',
-      data: [],
-      borderColor: '#3e95cd',
-      fill: false,
-    };
-    const tminDataset = {
-      label: 'Min-Temperature',
-      data: [],
-      borderColor: '#8e5ea2',
-      fill: false,
-    };
-    const prcpDataset = {
-      label: 'Precipitation',
-      data: [],
-      borderColor: '#3cba9f',
-      fill: false,
-    };
-    const datasets = [];
-    cityTemp.forEach((item) => {
-      tmaxDataset.data.push(item.tmax);
-      tminDataset.data.push(item.tmin);
-      prcpDataset.data.push(item.prcp);
-    });
+  //   const cityTemp = jsondata.cityTemperature;
+  //   cityTemp.forEach((item) => labels.push(item.year));
+  //   const tmaxDataset = {
+  //     label: 'Max-Temperature',
+  //     data: [],
+  //     borderColor: '#3e95cd',
+  //     fill: false,
+  //   };
+  //   const tminDataset = {
+  //     label: 'Min-Temperature',
+  //     data: [],
+  //     borderColor: '#8e5ea2',
+  //     fill: false,
+  //   };
+  //   const prcpDataset = {
+  //     label: 'Precipitation',
+  //     data: [],
+  //     borderColor: '#3cba9f',
+  //     fill: false,
+  //   };
+  //   const datasets = [];
+  //   cityTemp.forEach((item) => {
+  //     tmaxDataset.data.push(item.tmax);
+  //     tminDataset.data.push(item.tmin);
+  //     prcpDataset.data.push(item.prcp);
+  //   });
 
-    datasets.push(tmaxDataset, tminDataset, prcpDataset);
+  //   datasets.push(tmaxDataset, tminDataset, prcpDataset);
 
-    console.log(datasets);
+  //   console.log(datasets);
 
-    // new Chart(document.getElementById('line-chart'), {
-    //   type: 'line',
-    //   data: {
-    //   labels,
-    //   datasets,
-    // },
-    //   options: {
-    //   title: {
-    //   display: true,
-    //   text: 'World population per region (in millions)',
-    // },
-    // },
-    // });
-  };
+  // };
 
-  fetch(api_url)
-    .then((response) => response.json())
-    .then((newData) => {
-      console.log('newData', newData);
-      //console.log(newData);
-      jsondata = newData;
-      generate_chart(jsondata);
-    })
-    .catch((err) => console.log(error));
+  // fetch(api_url)
+  //   .then((response) => response.json())
+  //   .then((newData) => {
+  //     console.log('newData', newData);
+  //     //console.log(newData);
+  //     jsondata = newData;
+  //     generate_chart(jsondata);
+  //   })
+  //   .catch((err) => console.log(error));
 };
