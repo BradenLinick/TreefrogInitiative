@@ -60,9 +60,9 @@ require([
 
   let myLineChart;
   function executeIdentifyTask(event) {
-    
+
     // hide tooltip
-    
+
     var tooltipSpan = document.getElementById('tooltip-span');
     tooltipSpan.style.display = 'none';
 
@@ -94,97 +94,68 @@ require([
           var newCityID = feature.attributes.ID;
           // callData(newCityID);
 
-          const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
+          // const api_url =`http://sfi.gotdns.com:8080/Hackathon1/city/getCityTemperature?cityId=${newCityID}&month=1`;
+          const path = "https://legend-be2.spatialfrontlab.com/backend/hottopic/getHotTopic?Tmax=1.5&Tmin=2.5&Prcp=3.5&Humidity=4.2"
+          fetch(path)
+            .then((response) => response.json())
+            .then((newData) => {
+              console.log('newData', newData);
 
-          // fetch(api_url)
-          //   .then((response) => response.json())
-          //   .then((newData) => {
-          //     console.log('newData', newData);
-          //     //console.log(newData);
-          //     jsondata = newData;
-          //     generate_chart(jsondata);
-          //   })
-          //   .catch((err) => console.log(error));
 
-          const someData = {
-            "hottopic": [
-                {
-                    "travel": 8.9,
-                    "education": 4.5,
-                    "food": 6,
-                    "music": 5.2,
-                    "shopping": 9.1
-                }
-            ]
-          }
-
-          console.log(someData.hottopic[0])
-
-          const trendData = [];
-          for (const [key, value] of Object.entries(someData.hottopic[0])) {
-            trendData.push(value);
-          }
-
-          console.log(trendData);
-
-            // console.log('jsondata.cityTemperature', jsondata.cityTemperature);
-            // const labels = [];
-            // const cityId = jsondata.cityId;
-
-            // const cityTemp = jsondata.cityTemperature;
-            // cityTemp.forEach((item) => labels.push(item.year));
-            // const tmaxDataset = {
-            //   label: 'Max-Temperature',
-            //   data: [],
-            //   borderColor: '#3e95cd',
-            //   fill: false,
-            // };
-            // const tminDataset = {
-            //   label: 'Min-Temperature',
-            //   data: [],
-            //   borderColor: '#8e5ea2',
-            //   fill: false,
-            // };
-            // const prcpDataset = {
-            //   label: 'Precipitation',
-            //   data: [],
-            //   borderColor: '#3cba9f',
-            //   fill: false,
-            // };
-            // const datasets = [];
-            // cityTemp.forEach((item) => {
-            //   tmaxDataset.data.push(item.tmax);
-            //   tminDataset.data.push(item.tmin);
-            //   prcpDataset.data.push(item.prcp);
-            // });
-
-            // datasets.push(tmaxDataset, tminDataset, prcpDataset);
-
-            // console.log(datasets);
-
-          if (myLineChart !== undefined) {
-            myLineChart.destroy();
-          }
-
-          myLineChart = new Chart(document.getElementById("bar-chart"), {
-            type: 'bar',
-            data: {
-              labels: ["Travel", "Education", "Food", "Music", "Shopping"],
-              datasets: [
-                {
-                  label: '',
-                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                  data: trendData
-                }
-              ]
-            },
-            options: {
-              legend: { display: false },
-              title: {
-                display: false
+              const trendData = [];
+              for (const [key, value] of Object.entries(newData)) {
+                trendData.push(value);
               }
-            }
-        });
+
+              console.log(trendData);
+              if (myLineChart !== undefined) {
+                myLineChart.destroy();
+              }
+
+              myLineChart = new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                  labels: ["Travel", "Education", "Food", "Music", "Shopping"],
+                  datasets: [
+                    {
+                      label: '',
+                      backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                      data: trendData
+                    }
+                  ]
+                },
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: false
+                  }
+                }
+              });
+
+            })
+            .catch((err) => console.log(error));
+
+          // const someData = {
+          //   "hottopic": [
+          //     {
+          //       "travel": 8.9,
+          //       "education": 4.5,
+          //       "food": 6,
+          //       "music": 5.2,
+          //       "shopping": 9.1
+          //     }
+          //   ]
+          // }
+
+          // console.log(someData.hottopic[0])
+
+          // const trendData = [];
+          // for (const [key, value] of Object.entries(someData.hottopic[0])) {
+          //   trendData.push(value);
+          // }
+
+          // console.log(trendData);
+
         }
       })
 
