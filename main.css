@@ -55,7 +55,7 @@ p {
 }
 
 .chart {
-  background-color: rgba(255, 255, 255, .9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .map-container {
@@ -64,42 +64,42 @@ p {
   margin-bottom: 1rem;
 }
 
-h2{
-  background-color: #FEFFED;
+h2 {
+  background-color: #feffed;
   padding: 30px 35px;
   margin: -10px -50px;
-  text-align:center;
+  text-align: center;
   border-radius: 10px 10px 0 0;
-  }
-  hr{
+}
+hr {
   margin: 10px -50px;
   border: 0;
   border-top: 1px solid #ccc;
   margin-bottom: 40px;
-  }
-  .login-container{
+}
+.login-container {
   width: 900px;
   height: 610px;
-  margin:35px auto;
+  margin: 35px auto;
   font-family: 'Raleway', sans-serif;
   display: flex;
   justify-content: center;
-  }
-  .login-main{
+}
+.login-main {
   width: 300px;
   padding: 10px 50px 25px;
   border: 2px solid gray;
   border-radius: 10px;
-  margin-top:50px;
-  background-color: rgba(255, 255, 255, .8);
+  margin-top: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
-  }
+.form-inputs {
+  margin-bottom: 0.5rem;
+}
 
-  .form-inputs {
-    margin-bottom: .5rem;
-  }
-
-  input[type=text],input[type=password]{
+input[type='text'],
+input[type='password'] {
   width: 100%;
   height: 40px;
   padding: 5px;
@@ -107,42 +107,49 @@ h2{
   color: #4f4f4f;
   font-size: 16px;
   border-radius: 5px;
-  }
-  label{
+}
+label {
   color: #464646;
   text-shadow: 0 1px 0 #fff;
   font-size: 14px;
   font-weight: bold;
-  }
-  center{
-  font-size:32px;
-  }
-  .note{
-  color:red;
-  }
-  .valid{
-  color:green;
-  }
-  .back{
+}
+center {
+  font-size: 32px;
+}
+.note {
+  color: red;
+}
+.valid {
+  color: green;
+}
+.back {
   text-decoration: none;
   border: 1px solid rgb(0, 143, 255);
   background-color: rgb(0, 214, 255);
   padding: 3px 20px;
   border-radius: 2px;
   color: black;
-  }
-  input[type=button]{
+}
+input[type='button'] {
   font-size: 16px;
   background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
   border: 1px solid #e5a900;
-  color: #4E4D4B;
+  color: #4e4d4b;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
   border-radius: 5px;
   padding: 10px 0;
-  outline:none;
-  }
-  input[type=button]:hover{
+  outline: none;
+}
+input[type='button']:hover {
   background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
-  }
+}
+
+#rightImage {
+  bottom: 20px;
+  right: 10px;
+  width: 100px;
+  position: fixed;
+}

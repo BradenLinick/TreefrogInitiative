@@ -1,92 +1,98 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Climate Watcher</title>
+    <style>
+      #viewDiv {
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.18/esri/themes/light/main.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+    <script src="https://js.arcgis.com/4.18/"></script>
+    <script src="config.js"></script>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Climate Watcher</title>
-  <style>
-    #viewDiv {
-      height: 100vh;
-      width: 100%;
-    }
-  </style>
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
-  <script src="https://js.arcgis.com/4.18/"></script>
-  <script src="config.js"></script>
+    <style>
+      #tooltip-span {
+        text-decoration: none;
+        position: absolute;
+        border: 1px solid black;
+        border-radius: 5px;
+        z-index: 1;
+        background: white;
+        display: none;
+        height: 375px;
+        width: 410px;
+        padding: 1rem 1rem;
+      }
 
+      .map-container:hover .tooltip-span span {
+        display: block;
+        position: fixed;
+        overflow: hidden;
+      }
+    </style>
+  </head>
 
-  <style>
-    #tooltip-span {
-      text-decoration: none;
-      position: absolute;
-      border: 1px solid black;
-      border-radius: 5px;
-      z-index: 1;
-      background: white;
-      display: none;
-      height: 375px;
-      width: 410px;
-      padding: 1rem 1rem;
-    }
-
-    .map-container:hover .tooltip-span span {
-      display: block;
-      position: fixed;
-      overflow: hidden;
-    }
-  </style>
-
-</head>
-
-<body>
-  <div id="tooltip-span" class="display-flex flex-column">
-    <h6>Trends</h6>
-    <h4 id="city">City</h4>
-    <p>Temperature</p>
-    <div class="temp-container">
-      <div class="temp-sub-container">
-        <p class="small-font">Highest</p>
-        <p id="high" class="number">75%</p>
+  <body>
+    <div id="tooltip-span" class="display-flex flex-column">
+      <h6>Trends</h6>
+      <h4 id="city">City</h4>
+      <p>Temperature</p>
+      <div class="temp-container">
+        <div class="temp-sub-container">
+          <p class="small-font">Highest</p>
+          <p id="high" class="number">75%</p>
+        </div>
+        <div class="temp-sub-container">
+          <p id="low" class="small-font">Lowest</p>
+          <p class="number">75%</p>
+        </div>
+        <div class="temp-sub-container">
+          <p class="small-font">Precipitation</p>
+          <p id="precipitation" class="number">75%</p>
+        </div>
+        <div class="temp-sub-container">
+          <p class="small-font">Humidity</p>
+          <p id="humidity" class="number">75%</p>
+        </div>
       </div>
-      <div class="temp-sub-container">
-        <p id="low" class="small-font">Lowest</p>
-        <p class="number">75%</p>
-      </div>
-      <div class="temp-sub-container">
-        <p class="small-font">Precipitation</p>
-        <p id="precipitation" class="number">75%</p>
-      </div>
-      <div class="temp-sub-container">
-        <p class="small-font">Humidity</p>
-        <p id="humidity" class="number">75%</p>
-      </div>
+      <canvas id="bar-chart" width="600" height="300"></canvas>
     </div>
-    <canvas id="bar-chart" width="600" height="300"></canvas>
-  </div>
 
-  <div class="map-container">
-    <div id="viewDiv"></div>
-  </div>
+    <div class="map-container">
+      <div id="viewDiv"></div>
+    </div>
 
-  <!-- <div class="chart-container">
+    <!-- <div class="chart-container">
     <canvas id="bar-chart-horizontal"></canvas>
   </div> -->
+    <img src="./images/Icon1_Artboard 4.png" id="rightImage" />
+  </body>
+  <script>
+    // var tooltipSpan = document.getElementById('tooltip-span');
 
-</body>
-<script>
-  // var tooltipSpan = document.getElementById('tooltip-span');
-
-  // window.onmousemove = function (e) {
-  //   var x = e.clientX,
-  //     y = e.clientY;
-  //   tooltipSpan.style.top = (y + 20) + 'px';
-  //   tooltipSpan.style.left = (x + 20) + 'px';
-  // };
-</script>
-
+    // window.onmousemove = function (e) {
+    //   var x = e.clientX,
+    //     y = e.clientY;
+    //   tooltipSpan.style.top = (y + 20) + 'px';
+    //   tooltipSpan.style.left = (x + 20) + 'px';
+    // };
+  </script>
 </html>
